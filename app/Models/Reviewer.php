@@ -21,4 +21,24 @@ class Reviewer extends Authenticatable
     protected $hidden = [
         'password',
     ];
+
+    public function isReader(): bool
+    {
+        return false;
+    }
+
+    public function isAuthor(): bool
+    {
+        return false;
+    }
+
+    public function isReviewer(): bool
+    {
+        return true;
+    }
+
+    public function isAdmin(): bool
+    {
+        return false;
+    }
 }

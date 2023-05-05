@@ -21,4 +21,24 @@ class Reader extends Authenticatable
     protected $hidden = [
         'password',
     ];
+
+    public function isReader(): bool
+    {
+        return true;
+    }
+
+    public function isAuthor(): bool
+    {
+        return false;
+    }
+
+    public function isReviewer(): bool
+    {
+        return false;
+    }
+
+    public function isAdmin(): bool
+    {
+        return false;
+    }
 }
