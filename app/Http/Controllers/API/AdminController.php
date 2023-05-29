@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\API\BaseController;
+use App\Http\Requests\Admin\CreateAdminRequest;
 use App\Http\Resources\Admin\AdminResource;
 use App\Services\Admin\CreateAdminAccountService;
 use Illuminate\Http\Request;
@@ -17,16 +18,10 @@ class AdminController extends BaseController
         $this->createAdminAccountService = $createAdminAccountService;
     }
 
-    public function store(Request $request)
+    public function store(CreateAdminRequest $request)
     {
-        $adminArray = [
-            "name" => $request->name,
-            "email" => $request->email,
-            "password" => $request->passwords
-        ];
-
         return $this->sendResponse(
-            new AdminResource($this->createAdminAccountService->execute($adminArray)),
+            new AdminResource($this->createAdminAccountService->execute($request->validated())),
             "",
             201
         );
