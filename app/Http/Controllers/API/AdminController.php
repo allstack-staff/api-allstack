@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\CreateAdminRequest;
 use App\Http\Resources\Admin\AdminCollection;
 use App\Http\Resources\Admin\AdminResource;
 use App\Services\Admin\CreateAdminAccountService;
+use App\Services\Admin\GetAdminByIdService;
 use App\Services\Admin\GetAllAdminsSercice;
 use Illuminate\Http\Request;
 
@@ -14,13 +15,16 @@ class AdminController extends BaseController
 {
     protected $createAdminAccountService;
     protected $getAllAdminsService;
+    protected $getAdminByIdService;
 
     public function __construct(
         CreateAdminAccountService $createAdminAccountService,
-        GetAllAdminsSercice $getAllAdminsSercice
+        GetAllAdminsSercice $getAllAdminsSercice,
+        GetAdminByIdService $getAdminByIdService
     ) {
         $this->createAdminAccountService = $createAdminAccountService;
         $this->getAllAdminsService = $getAllAdminsSercice;
+        $this->getAdminByIdService = $getAdminByIdService;
     }
 
     public function index(Request $request)
@@ -38,6 +42,15 @@ class AdminController extends BaseController
             new AdminResource($this->createAdminAccountService->execute($request->validated())),
             "",
             201
+        );
+    }
+
+    public function getById(Request $request, $id)
+    {
+        return $this->sendResponse(
+            new AdminResource($this->getAdminByIdService->execute($id)),
+            "",
+            200
         );
     }
 }
