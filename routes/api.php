@@ -21,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // ADMIN
 Route::post('/admins/register', [AdminController::class, 'store']);
+Route::get('/admins', [AdminController::class, 'index']);
