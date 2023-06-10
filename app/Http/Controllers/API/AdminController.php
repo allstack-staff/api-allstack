@@ -2,37 +2,52 @@
 
 namespace App\Http\Controllers\API;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController;
+
 use App\Http\Requests\Admin\CreateAdminRequest;
+use App\Http\Requests\Admin\ChangeAdminRequest;
+use App\Http\Requests\Admin\DeleteAdminRequest;
+use App\Http\Requests\Admin\GetAdminRequest;
+
+use App\Services\Admin\CreateAdminAccountService;
+use App\Services\Admin\ChangeAdminAccountService;
+use App\Services\Admin\DeleteAdminAccountService;
+use App\Services\Admin\GetAdminAccountService;
+use App\Services\Admin\GetAllAdminService;
+
 use App\Http\Resources\Admin\AdminCollection;
 use App\Http\Resources\Admin\AdminResource;
-use App\Services\Admin\CreateAdminAccountService;
-use App\Services\Admin\GetAdminByIdService;
-use App\Services\Admin\GetAllAdminsSercice;
-use Illuminate\Http\Request;
+
 
 class AdminController extends BaseController
 {
     protected $createAdminAccountService;
-    protected $getAllAdminsService;
-    protected $getAdminByIdService;
+    protected $changeAdminAccountService;
+    protected $deleteAdminAccountService;
+    protected $getAdminAccountService;
+    protected $getAllAdminService;
 
     public function __construct(
         CreateAdminAccountService $createAdminAccountService,
-        GetAllAdminsSercice $getAllAdminsSercice,
-        GetAdminByIdService $getAdminByIdService
+        ChangeAdminAccountService $changeAdminAccountService,
+        DeleteAdminAccountService $deleteAdminAccountService,
+        GetAdminAccountService $getAdminAccountService,
+        GetAllAdminService $getAllAdminService
     ) {
         $this->createAdminAccountService = $createAdminAccountService;
-        $this->getAllAdminsService = $getAllAdminsSercice;
-        $this->getAdminByIdService = $getAdminByIdService;
+        $this->changeAdminAccountService = $changeAdminAccountService;
+        $this->deleteAdminAccountService = $deleteAdminAccountService;
+        $this->getAdminAccountService = $getAdminAccountService;
+        $this->getAllAdminService = $getAllAdminService;
     }
 
     public function index(Request $request)
     {
         return $this->sendResponse(
-            new AdminCollection($this->getAllAdminsService->execute()),
+            new AdminCollection($this->getAllAdminService->execute()),
             "",
-            200
+            201
         );
     }
 
@@ -45,12 +60,30 @@ class AdminController extends BaseController
         );
     }
 
-    public function getById(Request $request, $id)
+    public function change(ChangeAdminRequest $request, $id)
     {
         return $this->sendResponse(
-            new AdminResource($this->getAdminByIdService->execute($id)),
+            new AdminResource($this->changeAdminAccountService->execute($request->validated(), $id)),
             "",
-            200
+            201
+        );
+    }
+
+    public function delete(DeleteAdminRequest $request)
+    {
+        return $this->sendResponse(
+            new AdminResource($this->deleteAdminAccountService->execute($request->validated())),
+            "",
+            201
+        );
+    }
+
+    public function read(GetAdminRequest $request)
+    {
+        return $this->sendResponse(
+            new AdminResource($this->getAdminAccountService->execute($request->validated())),
+            "",
+            201
         );
     }
 }

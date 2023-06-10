@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\API\AdminController;
+use App\Http\Controllers\API\AuthorController;
+use App\Http\Controllers\API\ReviewerController;
+use App\Http\Controllers\API\ReaderController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +24,29 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // ADMIN
-Route::post('/admins/register', [AdminController::class, 'store']);
 Route::get('/admins', [AdminController::class, 'index']);
-Route::get('/admins/{id}', [AdminController::class, 'getById']);
+Route::post('/admins/register', [AdminController::class, 'store']);
+Route::post('/admins/change/{id}', [AdminController::class, 'change']);
+Route::post('/admins/delete', [AdminController::class, 'delete']);
+Route::post('/admins/show', [AdminController::class, 'read']);
+
+// AUTHOR
+Route::get('/authors', [AuthorController::class, 'index']);
+Route::post('/authors/register', [AuthorController::class, 'store']);
+Route::post('/authors/change/{id}', [AuthorController::class, 'change']);
+Route::post('/authors/delete', [AuthorController::class, 'delete']);
+Route::post('/authors/show', [AuthorController::class, 'read']);
+
+// REVIEWER
+Route::get('/reviewers', [ReviewerController::class, 'index']);
+Route::post('/reviewers/register', [ReviewerController::class, 'store']);
+Route::post('/reviewers/change/{id}', [ReviewerController::class, 'change']);
+Route::post('/reviewers/delete', [ReviewerController::class, 'delete']);
+Route::post('/reviewers/show', [ReviewerController::class, 'read']);
+
+// READER
+Route::get('/readers', [ReaderController::class, 'index']);
+Route::post('/readers/register', [ReaderController::class, 'store']);
+Route::post('/readers/change/{id}', [ReaderController::class, 'change']);
+Route::post('/readers/delete', [ReaderController::class, 'delete']);
+Route::post('/readers/show', [ReaderController::class, 'read']);

@@ -2,10 +2,10 @@
 
 namespace App\Services\Admin;
 
-use App\Services\CreateAccountService;
+use App\Services\GetAccountService;
 use App\Repositories\AdminRepository;
 
-class CreateAdminAccountService extends CreateAccountService
+class GetAdminAccountService extends GetAccountService
 {
     public function __construct(AdminRepository $adminRepository)
     {

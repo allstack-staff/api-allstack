@@ -2,9 +2,10 @@
 
 namespace App\Services\Admin;
 
+use App\Exceptions\DomainException;
 use App\Repositories\AdminRepository;
 
-class GetAllAdminsSercice
+class GetAllAdminService
 {
     private $adminRepository;
 
@@ -15,6 +16,12 @@ class GetAllAdminsSercice
 
     public function execute()
     {
-        return $this->adminRepository->getAll();
+        $accounts = $this->adminRepository->getAll();
+
+        // if (!$accounts) {
+        //     throw new DomainException(['No registered account.'], 404);
+        // }
+
+        return $accounts;
     }
 }
