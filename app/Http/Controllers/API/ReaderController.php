@@ -47,7 +47,7 @@ class ReaderController extends BaseController
         return $this->sendResponse(
             new ReaderCollection($this->getAllReaderService->execute()),
             "",
-            201
+            200
         );
     }
 
@@ -65,7 +65,7 @@ class ReaderController extends BaseController
         return $this->sendResponse(
             new ReaderResource($this->changeReaderAccountService->execute($request->validated(), $id)),
             "",
-            201
+            200
         );
     }
 
@@ -74,7 +74,7 @@ class ReaderController extends BaseController
         return $this->sendResponse(
             new ReaderResource($this->deleteReaderAccountService->execute($request->validated())),
             "",
-            201
+            200
         );
     }
 
@@ -83,7 +83,7 @@ class ReaderController extends BaseController
         return $this->sendResponse(
             new ReaderResource($this->getReaderAccountService->execute($request->validated())),
             "",
-            201
+            200
         );
     }
 }

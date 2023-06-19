@@ -47,7 +47,7 @@ class AdminController extends BaseController
         return $this->sendResponse(
             new AdminCollection($this->getAllAdminService->execute()),
             "",
-            201
+            200
         );
     }
 
@@ -65,7 +65,7 @@ class AdminController extends BaseController
         return $this->sendResponse(
             new AdminResource($this->changeAdminAccountService->execute($request->validated(), $id)),
             "",
-            201
+            200
         );
     }
 
@@ -74,7 +74,7 @@ class AdminController extends BaseController
         return $this->sendResponse(
             new AdminResource($this->deleteAdminAccountService->execute($request->validated())),
             "",
-            201
+            200
         );
     }
 
@@ -83,7 +83,7 @@ class AdminController extends BaseController
         return $this->sendResponse(
             new AdminResource($this->getAdminAccountService->execute($request->validated())),
             "",
-            201
+            200
         );
     }
 }

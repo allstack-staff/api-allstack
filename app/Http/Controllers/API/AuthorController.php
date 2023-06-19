@@ -47,7 +47,7 @@ class AuthorController extends BaseController
         return $this->sendResponse(
             new AuthorCollection($this->getAllAuthorService->execute()),
             "",
-            201
+            200
         );
     }
 
@@ -65,7 +65,7 @@ class AuthorController extends BaseController
         return $this->sendResponse(
             new AuthorResource($this->changeAuthorAccountService->execute($request->validated(), $id)),
             "",
-            201
+            200
         );
     }
 
@@ -74,7 +74,7 @@ class AuthorController extends BaseController
         return $this->sendResponse(
             new AuthorResource($this->deleteAuthorAccountService->execute($request->validated())),
             "",
-            201
+            200
         );
     }
 
@@ -83,7 +83,7 @@ class AuthorController extends BaseController
         return $this->sendResponse(
             new AuthorResource($this->getAuthorAccountService->execute($request->validated())),
             "",
-            201
+            200
         );
     }
 }

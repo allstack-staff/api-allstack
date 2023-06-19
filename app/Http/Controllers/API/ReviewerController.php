@@ -47,7 +47,7 @@ class ReviewerController extends BaseController
         return $this->sendResponse(
             new ReviewerCollection($this->getAllReviewerService->execute()),
             "",
-            201
+            200
         );
     }
 
@@ -65,7 +65,7 @@ class ReviewerController extends BaseController
         return $this->sendResponse(
             new ReviewerResource($this->changeReviewerAccountService->execute($request->validated(), $id)),
             "",
-            201
+            200
         );
     }
 
@@ -74,7 +74,7 @@ class ReviewerController extends BaseController
         return $this->sendResponse(
             new ReviewerResource($this->deleteReviewerAccountService->execute($request->validated())),
             "",
-            201
+            200
         );
     }
 
@@ -83,7 +83,7 @@ class ReviewerController extends BaseController
         return $this->sendResponse(
             new ReviewerResource($this->getReviewerAccountService->execute($request->validated())),
             "",
-            201
+            200
         );
     }
 }
