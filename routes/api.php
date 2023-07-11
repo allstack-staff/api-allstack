@@ -52,4 +52,5 @@ Route::post('/readers/delete', [ReaderController::class, 'delete']);
 Route::post('/readers/show', [ReaderController::class, 'read']);
 
 // TAG
+Route::get('/tags', [TagController::class, 'index']);
 Route::post('/tags/register', [TagController::class, 'store']);
