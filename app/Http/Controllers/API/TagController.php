@@ -9,19 +9,23 @@ use App\Http\Resources\Tag\TagCollection;
 use App\Http\Resources\Tag\TagResource;
 use App\Services\Tag\CreateTagService;
 use App\Services\Tag\GetAllTagsService;
+use App\Services\Tag\GetTagByIdService;
 use Illuminate\Http\Request;
 
 class TagController extends BaseController
 {
     protected $createTagService;
     protected $getAllTagsService;
+    protected $getTagByIdService;
 
     public function __construct(
         CreateTagService $createTagService,
-        GetAllTagsService $getAllTagsService
+        GetAllTagsService $getAllTagsService,
+        GetTagByIdService $getTagByIdService
     ) {
         $this->createTagService = $createTagService;
         $this->getAllTagsService = $getAllTagsService;
+        $this->getTagByIdService = $getTagByIdService;
     }
 
     public function index(Request $request)
@@ -39,6 +43,15 @@ class TagController extends BaseController
             new TagResource($this->createTagService->execute($request->validated())),
             "",
             201
+        );
+    }
+
+    public function getById(Request $request, int $id)
+    {
+        return $this->sendResponse(
+            new TagResource($this->getTagByIdService->execute($id)),
+            "",
+            200
         );
     }
 }

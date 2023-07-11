@@ -54,3 +54,4 @@ Route::post('/readers/show', [ReaderController::class, 'read']);
 // TAG
 Route::get('/tags', [TagController::class, 'index']);
 Route::post('/tags/register', [TagController::class, 'store']);
+Route::get('/tags/{id}', [TagController::class, 'getById']);
