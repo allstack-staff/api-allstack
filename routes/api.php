@@ -4,7 +4,7 @@ use App\Http\Controllers\API\AdminController;
 use App\Http\Controllers\API\AuthorController;
 use App\Http\Controllers\API\ReviewerController;
 use App\Http\Controllers\API\ReaderController;
-
+use App\Http\Controllers\API\TagController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -50,3 +50,6 @@ Route::post('/readers/register', [ReaderController::class, 'store']);
 Route::post('/readers/change/{id}', [ReaderController::class, 'change']);
 Route::post('/readers/delete', [ReaderController::class, 'delete']);
 Route::post('/readers/show', [ReaderController::class, 'read']);
+
+// TAG
+Route::post('/tags/register', [TagController::class, 'store']);
